@@ -10,3 +10,14 @@ def updating_leaderboard(username, wpm):
     leaderboard.append({"username": username, "wpm": wpm})
     leaderboard.sort(key=lambda x: x["wpm"], reverse=True)
     saving_leaderboard(leaderboard)
+
+# Function to display the leaderboard
+def showing_leaderboard():
+    leaderboard = loading_leaderboard()
+
+    print("\nLeaderboard:")
+    print("Username\tWPM")
+    print("===================")
+    for entry in leaderboard:
+        print(f"{entry['username']}\t\t{entry['wpm']}")
+    print("===================")
