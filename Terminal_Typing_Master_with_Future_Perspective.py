@@ -30,3 +30,70 @@ def loading_words_from_json(category):
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error loading words: {e}")
         return []
+    
+# Function to get user input during the typing challenge
+def getting_user_input():
+    return input("Type the words as shown and press Enter: ")
+
+# Function to save the updated leaderboard to a JSON file
+def saving_leaderboard(leaderboard):
+    try:
+        with open("leaderboard.json", "w") as file:
+            json.dump(leaderboard, file)
+    except (PermissionError, FileNotFoundError) as e:
+        print(f"Error saving leaderboard: {e}")
+
+# Function to load the leaderboard from a JSON file
+def loading_leaderboard():
+    if not os.path.exists("leaderboard.json"):
+        return []
+    try:
+        with open("leaderboard.json", "r") as file:
+            return json.load(file)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return []
+
+# Function to allow the user to choose a typing category
+def choose_typing_category():
+    print("\nAvailable Typing Categories:")
+    print("1. Random")
+    print("2. Technology")
+    # Add more categories...
+
+    category_choice = input("Enter the number corresponding to your desired category: ")
+    return {
+        1: "random",
+        2: "technology",
+        # Map other numbers to corresponding categories...
+    }.get(int(category_choice), "random")
+
+# Function for the time-based typing challenge
+def time_based_typing_challenge(username, duration=60):
+    start_time = time.time()
+    end_time = start_time + duration
+
+    category = choose_typing_category()
+    words = loading_words_from_json(category)
+    random.shuffle(words)
+
+    print("\nTyping the following words:")
+    print(" ".join(words))
+
+    user_input = ""
+    current_time = time.time()
+
+    while current_time < end_time:
+        user_input = getting_user_input()
+        current_time = time.time()
+
+    time_taken = end_time - start_time
+    words_typed = len(user_input.split())
+    wpm = words_typed / (time_taken / 60)
+
+    print("\nTyping Metrics:")
+    print(f"Words Typed: {words_typed}")
+    print(f"Time Taken: {time_taken:.2f} seconds")
+    print(f"Words Per Minute (WPM): {wpm:.2f}")
+
+    updating_leaderboard(username, wpm)
+    showing_leaderboard()
