@@ -32,3 +32,7 @@ def loading_words_from_json(category):
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error loading words: {e}")
         return []
+    
+# Function to get user input during the typing challenge
+def getting_user_input():
+    return input("Typing the words as shown and pressing Enter: ")
