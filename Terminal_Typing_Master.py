@@ -55,3 +55,66 @@ def loading_leaderboard():
             return json.load(file)
     except (json.JSONDecodeError, FileNotFoundError):
         return []
+    
+# Main function to run the terminal typing master program
+def main():
+    print("🎰 Terminal Typing Master 🎰")
+
+    # Prompting for username
+    username = input("Entering your username: ")
+
+    while True:
+        # Displaying menu
+        print("\nMenu:")
+        print("1. Starting Typing Test")
+        print("2. Showing Leaderboard")
+        print("3. Exiting")
+
+        # Prompting for choice
+        choice = input("Entering your choice (1/2/3): ")
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("Invalid choice. Please entering 1, 2, or 3.")
+            continue
+
+        if choice == 1:
+            # Starting typing test
+            start_time = time.time()
+
+            # Choosing a typing category (adding more categories in the future)
+            category = "random"  # Example category
+            words = loading_words_from_json(category)
+            random.shuffle(words)
+
+            print("\nTyping the following words:")
+            print(" ".join(words))
+
+            user_input = getting_user_input()
+            end_time = time.time()
+
+            # Calculating metrics
+            time_taken = end_time - start_time
+            words_typed = len(user_input.split())
+            wpm = words_typed / (time_taken / 60)
+
+            print("\nTyping Metrics:")
+            print(f"Words Typed: {words_typed}")
+            print(f"Time Taken: {time_taken:.2f} seconds")
+            print(f"Words Per Minute (WPM): {wpm:.2f}")
+
+            # Updating and showing leaderboard
+            updating_leaderboard(username, wpm)
+            showing_leaderboard()
+
+        elif choice == 2:
+            # Showing leaderboard
+            showing_leaderboard()
+
+        elif choice == 3:
+            # Exiting
+            print("Exiting. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please entering 1, 2, or 3.")
