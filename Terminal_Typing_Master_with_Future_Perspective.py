@@ -97,3 +97,38 @@ def time_based_typing_challenge(username, duration=60):
 
     updating_leaderboard(username, wpm)
     showing_leaderboard()
+
+# Main function to run the terminal typing master program
+def main():
+    print("🎰 Terminal Typing Master 🎰")
+    username = input("Enter your username: ")
+
+    while True:
+        print("\nMenu:")
+        print("1. Start Typing Test")
+        print("2. Show Leaderboard")
+        print("3. Exit")
+
+        choice = input("Enter your choice (1/2/3): ")
+
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+            continue
+
+        if choice == 1:
+            time_based_typing_challenge(username)
+
+        elif choice == 2:
+            showing_leaderboard()
+
+        elif choice == 3:
+            print("Exiting. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+if __name__ == "__main__":
+    main()
