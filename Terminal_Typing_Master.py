@@ -36,3 +36,11 @@ def loading_words_from_json(category):
 # Function to get user input during the typing challenge
 def getting_user_input():
     return input("Typing the words as shown and pressing Enter: ")
+
+# Function to save the updated leaderboard to a JSON file
+def saving_leaderboard(leaderboard):
+    try:
+        with open("leaderboard.json", "w") as file:
+            json.dump(leaderboard, file)
+    except (PermissionError, FileNotFoundError) as e:
+        print(f"Error saving leaderboard: {e}")
