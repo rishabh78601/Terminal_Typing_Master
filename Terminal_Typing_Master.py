@@ -44,3 +44,14 @@ def saving_leaderboard(leaderboard):
             json.dump(leaderboard, file)
     except (PermissionError, FileNotFoundError) as e:
         print(f"Error saving leaderboard: {e}")
+
+# Function to load the leaderboard from a JSON file
+def loading_leaderboard():
+    if not os.path.exists("leaderboard.json"):
+        return []
+    
+    try:
+        with open("leaderboard.json", "r") as file:
+            return json.load(file)
+    except (json.JSONDecodeError, FileNotFoundError):
+        return []
