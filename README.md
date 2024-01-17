@@ -42,6 +42,5 @@ Objective : A terminal-based application that tests your typing speed by present
 1. Add more typing categories for a diverse experience.
 2. Implement a time-based challenge mode for additional difficulty.
 
-**Note:** Feel free to contribute by adding new categories, improving algorithms, or enhancing the user interface.
 
 Enjoy improving your typing skills! 🚀
