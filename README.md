@@ -36,11 +36,14 @@ Objective : A terminal-based application that tests your typing speed by present
 
 ### Files
 - **leaderboard.json:** Stores leaderboard data.
-- **random_words.json:** Example JSON file for the random word category.
+- **random_words.json:** Example JSON file for the Random word category.
+- **technology_words.json:** Example JSON file for the Technology word category.
 
 ## 🚀 Future Perspective
-1. Add more typing categories for a diverse experience.
-2. Implement a time-based challenge mode for additional difficulty.
+- Add more typing categories for a diverse experience.
+  1. def choose_typing_category():
+- Implement a time-based challenge mode for additional difficulty.
+  1. def time_based_typing_challenge(username, duration=60):
 
 
 Enjoy improving your typing skills! 🚀
